@@ -1,0 +1,16 @@
+---
+- name: Tarea 1 - Configurar EIGRP (Version de Compatibilidad)
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Aplicar la configuracion base de EIGRP
+      ios_command:
+        commands:
+          - configure terminal
+          - router eigrp EXAMEN
+          - address-family ipv4 unicast autonomous-system 100
+          -  network 192.168.56.0 0.0.0.255
+          - exit-address-family
+          - address-family ipv6 unicast autonomous-system 100
+          - end

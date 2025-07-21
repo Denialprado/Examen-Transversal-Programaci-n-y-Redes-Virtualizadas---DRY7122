@@ -1,0 +1,23 @@
+---
+- name: Tarea 3 - Obtener Informacion General del Router
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Obtener running-config completa
+      ios_command:
+        commands: "show running-config"
+      register: running_config
+
+    - name: Mostrar running-config completa
+      debug:
+        var: running_config.stdout_lines
+
+    - name: Obtener version del router
+      ios_command:
+        commands: "show version"
+      register: version_info
+      
+    - name: Mostrar version del router
+      debug:
+        var: version_info.stdout_lines

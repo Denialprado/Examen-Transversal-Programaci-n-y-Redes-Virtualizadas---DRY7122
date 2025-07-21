@@ -1,0 +1,23 @@
+---
+- name: Tarea 2 - Verificar EIGRP y Estado de Interfaces
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Obtener configuracion de EIGRP
+      ios_command:
+        commands: "show running-config | section eigrp"
+      register: eigrp_config
+    
+    - name: Mostrar configuracion de EIGRP
+      debug:
+        var: eigrp_config.stdout_lines
+
+    - name: Obtener estado de las interfaces
+      ios_command:
+        commands: "show ip interface brief"
+      register: interface_status
+
+    - name: Mostrar estado de las interfaces
+      debug:
+        var: interface_status.stdout_lines
